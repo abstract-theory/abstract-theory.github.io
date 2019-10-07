@@ -1,6 +1,6 @@
 
-#Using Ctypes with double pointers
-##September 4, 2018
+# Using Ctypes with double pointers
+## September 4, 2018
 
 
 There is very little on the web describing how to pass data to a C function that has a double pointer as an input variable. The following example passes a 2D Numpy matrix to a C library using ctypes.
