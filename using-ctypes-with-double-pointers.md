@@ -7,7 +7,7 @@ There is very little on the web describing how to pass data to a C function that
 
 Below is a function that has a double pointer as an input variable.
 
-``` c
+```c
     // my_lib.c
 
     #include <stdio.h>
@@ -22,13 +22,13 @@ Below is a function that has a double pointer as an input variable.
 
 To compile with Linux/GCC, run the below commands.
 
-``` sh
+```sh
     gcc -c -fPIC -O3 my_lib.c
     gcc -shared -Wl,-soname,my_lib.so -o my_lib.so my_lib.o
 
 This is a Python function that passes a matrix to the C function.
 
-``` python
+```python
     # dbl_ptr_example.py
 
     import numpy as np
@@ -47,7 +47,7 @@ This is a Python function that passes a matrix to the C function.
 
 At the Python terminal, run the below commands.
 
-``` python
+```python
     import dbl_ptr_example as dp_ex
     x = np.zeros([5, 7], np.int32, order='C')
     y = dp_ex.callCLib(x)
@@ -55,7 +55,7 @@ At the Python terminal, run the below commands.
 
 The resulting output should look like this:
 
-``` python
+```python
     [[  0 100 200 300 400 500 600]
      [  1 101 201 301 401 501 601]
      [  2 102 202 302 402 502 602]
