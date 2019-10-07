@@ -13,7 +13,7 @@ Trying to run BerkleyDB produced errors. In contrast, LMDB ran out of the box wi
 Currently Redis is ridiculously fast and among the very top performing key/value databases. In benchmarks comparing LMDB to a persistent Redis DB, the write speed of LMDB was substantially faster. For reads, LMDB's performance was about half that of Redis.
 
 
-```
+```python
 import random
 import lmdb
 

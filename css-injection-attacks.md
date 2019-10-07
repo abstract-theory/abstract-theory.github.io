@@ -5,7 +5,7 @@ You may have heard of the well known SQL injection attack. Code injection is a t
 
 Presuming you have a web page that is vulnerable to code injection, a web page that has suffered a CSS injection attack might resemble following:
 
-```
+```html
 <html>
  <head><title>HTML/CSS Injection Example</title></head>
  <body>
