@@ -1,0 +1,36 @@
+body {
+    max-width: 700px;
+    margin: auto;
+    padding: 10px;
+}
+
+pre {
+    white-space: pre-wrap;
+    font-family: monospace;
+    color: #ffffff;
+    background-color: #000000;
+    overflow: auto;
+    padding:10px;
+    border-radius:10px;
+    white-space: pre;
+}
+
+.String { color: #afaf5f; }
+.Number { color: #d7875f; }
+.Type { color: #5f87af; font-weight: bold; }
+.Include { color: #d7875f; }
+.Comment { color: #767676; background-color: #121212; padding-bottom: 1px; }
+.Statement { color: #d7d787; font-weight: bold; }
+.Function { color: #d7af5f; }
+
+.Special { color: #afd787; }
+
+.pythonFunction { color: #d7af5f; font-weight: bold; }
+.pythonOperator { color: #d7d787; }
+
+.Title { color: #ffffff; }
+.xmlTagName { color: #bcbcbc; }
+.xmlEndTag { color: #ff875f; font-weight: bold; }
+.Constant { color: #af875f; font-weight: bold; }
+.StorageClass { color: #d7d7af; }
+.xmlTag { color: #afd75f; font-weight: bold; }
