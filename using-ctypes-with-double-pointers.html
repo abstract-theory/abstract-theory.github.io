@@ -37,7 +37,7 @@ Below is a function that has a double pointer as an input variable.
 To compile with Linux/GCC, run the below commands.
 </p>
 <pre id='vimCodeElement'>
-gcc <span class="Special">-c</span> <span class="Special">-fPIC</span> <span class="Special">-O</span>3 my_lib.c
+gcc <span class="Special">-c</span> <span class="Special">-fPIC</span> <span class="Special">-O3</span> my_lib.c
 gcc <span class="Special">-shared</span> <span class="Special">-Wl</span>,-soname,my_lib.so <span class="Special">-o</span> my_lib.so my_lib.o
 </pre>
 
@@ -70,9 +70,12 @@ x.ctypes.data + x.strides[<span class="Number">0</span>]*np.arange(x.shape[<span
 At the Python terminal, run the below commands.
 </p>
 <pre id='vimCodeElement'>
+<span class="Include">import</span> numpy <span class="Statement">as</span> np
 <span class="Include">import</span> dbl_ptr_example <span class="Statement">as</span> dp_ex
+
 x = np.zeros([<span class="Number">5</span>, <span class="Number">7</span>], np.int32, order=<span class="String">'</span><span class="String">C</span><span class="String">'</span>)
 y = dp_ex.callCLib(x)
+
 <span class="Function">print</span>(y)
 </pre>
 
