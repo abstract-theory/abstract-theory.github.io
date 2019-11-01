@@ -1,0 +1,46 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="stylesheet" type="text/css" href="main-1.0.css" />
+<title>HTML/CSS Injection Attacks</title>
+
+</head>
+<body>
+
+<p>
+<h3>HTML/CSS Injection Attacks</h3>
+<i>updated: November 1, 2019</i>
+</p>
+<p>
+You may have heard of the well known SQL injection attack. Code injection is a type of vulnerability, and it affects far more than just SQL. Another type of injection attack is CSS injection. A lot of novice web developers my not know how an actual CSS injection attack might look when implemented. Thus, they aren’t well prepared to mitigate such a vulnerability.
+</p>
+<p>
+Presuming you have a web page that is vulnerable to code injection, a web page that has suffered a CSS injection attack might resemble following:
+</p>
+
+<pre id='vimCodeElement'>
+<span class="xmlTag">&lt;</span><span class="xmlTagName">html</span><span class="xmlTag">&gt;</span>
+ <span class="xmlTag">&lt;</span><span class="xmlTagName">head</span><span class="xmlTag">&gt;&lt;</span><span class="xmlTagName">title</span><span class="xmlTag">&gt;</span><span class="Title">HTML/CSS Injection Example</span><span class="xmlEndTag">&lt;/</span><span class="xmlTagName">title</span><span class="xmlEndTag">&gt;&lt;/</span><span class="xmlTagName">head</span><span class="xmlEndTag">&gt;</span>
+ <span class="xmlTag">&lt;</span><span class="xmlTagName">body</span><span class="xmlTag">&gt;</span>
+
+ <span class="Comment">&lt;!</span><span class="Comment">-- This code contains the HTML that the developer</span>
+<span class="Comment"> intended to be displayed --</span><span class="Comment">&gt;</span>
+ <span class="xmlTag">&lt;</span><span class="xmlTagName">button</span><span class="xmlTag"> </span><span class="Type">class</span><span class="xmlTag">=</span><span class="String">&quot;good&quot;</span><span class="xmlTag">&gt;</span>Do Something Good<span class="xmlEndTag">&lt;/</span><span class="xmlTagName">button</span><span class="xmlEndTag">&gt;</span>
+
+<span class="Comment">&lt;!</span><span class="Comment">-- This code block contains HTML and CSS that a</span>
+<span class="Comment"> malicious user injected into the page --</span><span class="Comment">&gt;</span>
+ <span class="xmlTag">&lt;</span><span class="Statement">style</span><span class="xmlTag"> </span><span class="Type">type</span><span class="xmlTag">=</span><span class="String">&quot;text/css&quot;</span><span class="xmlTag">&gt;</span><span class="Function">.</span><span class="Function">good</span> <span class="Function">{</span><span class="StorageClass">display</span>: <span class="Constant">none</span>;<span class="Function">}</span><span class="xmlEndTag">&lt;/</span><span class="Statement">style</span><span class="xmlEndTag">&gt;</span>
+ <span class="xmlTag">&lt;</span><span class="xmlTagName">button</span><span class="xmlTag"> </span><span class="Type">class</span><span class="xmlTag">=</span><span class="String">&quot;evil&quot;</span><span class="xmlTag">&gt;</span>Do Something Evil<span class="xmlEndTag">&lt;/</span><span class="xmlTagName">button</span><span class="xmlEndTag">&gt;</span>
+
+ <span class="xmlEndTag">&lt;/</span><span class="xmlTagName">body</span><span class="xmlEndTag">&gt;</span>
+<span class="xmlEndTag">&lt;/</span><span class="xmlTagName">html</span><span class="xmlEndTag">&gt;</span>
+
+</pre>
+</body>
+</html>
+
+
+
+

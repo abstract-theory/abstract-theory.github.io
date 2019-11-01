@@ -1,0 +1,94 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+
+<link rel="stylesheet" type="text/css" href="main-1.0.css" />
+<title>Using Ctypes with double pointers</title>
+</head>
+<body>
+
+<p>
+<h3>Using Ctypes with double pointers</h3>
+<i>updated: November 1, 2019</i>
+</p>
+<p>
+There is very little on the web describing how to pass data to a C function that has a double pointer as an input variable. The following example passes a 2D Numpy matrix to a C library using ctypes.
+</p>
+<p>
+Below is a function that has a double pointer as an input variable.
+</p>
+<pre id='vimCodeElement'>
+<span class="Comment">// my_lib.c</span>
+
+<span class="Include">#include </span><span class="String">&lt;stdio.h&gt;</span>
+
+<span class="Type">void</span> cFunc (<span class="Type">int</span> **x, <span class="Type">int</span> xLim, <span class="Type">int</span> yLim)
+{
+    <span class="Type">int</span> nx, ny;
+    <span class="Statement">for</span> (nx = <span class="Number">0</span>; nx &lt; xLim; nx++)
+        <span class="Statement">for</span> (ny = <span class="Number">0</span>; ny &lt; yLim; ny++)
+            x[nx][ny] = nx+ny*<span class="Number">100</span>;
+}
+</pre>
+
+
+<p>
+To compile with Linux/GCC, run the below commands.
+</p>
+<pre id='vimCodeElement'>
+gcc <span class="Special">-c</span> <span class="Special">-fPIC</span> <span class="Special">-O</span>3 my_lib.c
+gcc <span class="Special">-shared</span> <span class="Special">-Wl</span>,-soname,my_lib.so <span class="Special">-o</span> my_lib.so my_lib.o
+</pre>
+
+
+<p>
+This is a Python function that passes a matrix to the C function.
+</p>
+<pre id='vimCodeElement'>
+<span class="Comment"># dbl_ptr_example.py</span>
+
+<span class="Include">import</span> numpy <span class="Statement">as</span> np
+<span class="Include">import</span> ctypes <span class="Statement">as</span> ct
+
+lib = ct.CDLL(<span class="String">'</span><span class="String">./my_lib.so</span><span class="String">'</span>)
+
+toDblPtr = <span class="Statement">lambda</span> x: x.ctypes.data + x.strides[<span class="Number">0</span>]*np.arange(x.shape[<span class="Number">0</span>], dtype=np.uintp)
+
+<span class="Statement">def</span> <span class="pythonFunction">callCLib</span>(matrix):
+    [xSz, ySz] = matrix.shape
+    lib.cFunc.restype = <span class="Function">None</span>
+    lib.cFunc.argtypes = [np.ctypeslib.ndpointer(dtype=np.uintp, ndim=<span class="Number">1</span>)] +  [ct.c_uint]*<span class="Number">2</span>
+    lib.cFunc(toDblPtr(matrix), xSz, ySz)
+    <span class="Statement">return</span> matrix
+</pre>
+
+
+<p>
+At the Python terminal, run the below commands.
+</p>
+<pre id='vimCodeElement'>
+<span class="Include">import</span> dbl_ptr_example <span class="Statement">as</span> dp_ex
+x = np.zeros([<span class="Number">5</span>, <span class="Number">7</span>], np.int32, order=<span class="String">'</span><span class="String">C</span><span class="String">'</span>)
+y = dp_ex.callCLib(x)
+<span class="Function">print</span>(y)
+</pre>
+
+
+<p>
+The resulting output should look like this:
+</p>
+<pre id='vimCodeElement'>
+[[  <span class="Number">0</span> <span class="Number">100</span> <span class="Number">200</span> <span class="Number">300</span> <span class="Number">400</span> <span class="Number">500</span> <span class="Number">600</span>]
+ [  <span class="Number">1</span> <span class="Number">101</span> <span class="Number">201</span> <span class="Number">301</span> <span class="Number">401</span> <span class="Number">501</span> <span class="Number">601</span>]
+ [  <span class="Number">2</span> <span class="Number">102</span> <span class="Number">202</span> <span class="Number">302</span> <span class="Number">402</span> <span class="Number">502</span> <span class="Number">602</span>]
+ [  <span class="Number">3</span> <span class="Number">103</span> <span class="Number">203</span> <span class="Number">303</span> <span class="Number">403</span> <span class="Number">503</span> <span class="Number">603</span>]
+ [  <span class="Number">4</span> <span class="Number">104</span> <span class="Number">204</span> <span class="Number">304</span> <span class="Number">404</span> <span class="Number">504</span> <span class="Number">604</span>]]
+</pre>
+
+</body>
+</html>
+
+
+
+
