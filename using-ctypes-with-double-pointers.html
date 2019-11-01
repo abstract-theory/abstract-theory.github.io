@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="stylesheet" type="text/css" href="main-1.0.css" />
 <title>Using Ctypes with double pointers</title>
 </head>
@@ -53,12 +53,14 @@ This is a Python function that passes a matrix to the C function.
 
 lib = ct.CDLL(<span class="String">'</span><span class="String">./my_lib.so</span><span class="String">'</span>)
 
-toDblPtr = <span class="Statement">lambda</span> x: x.ctypes.data + x.strides[<span class="Number">0</span>]*np.arange(x.shape[<span class="Number">0</span>], dtype=np.uintp)
+toDblPtr = <span class="Statement">lambda</span> x: <span class="Special">\</span>
+x.ctypes.data + x.strides[<span class="Number">0</span>]*np.arange(x.shape[<span class="Number">0</span>], dtype=np.uintp)
 
 <span class="Statement">def</span> <span class="pythonFunction">callCLib</span>(matrix):
     [xSz, ySz] = matrix.shape
     lib.cFunc.restype = <span class="Function">None</span>
-    lib.cFunc.argtypes = [np.ctypeslib.ndpointer(dtype=np.uintp, ndim=<span class="Number">1</span>)] +  [ct.c_uint]*<span class="Number">2</span>
+    lib.cFunc.argtypes = <span class="Special">\</span>
+    [np.ctypeslib.ndpointer(dtype=np.uintp, ndim=<span class="Number">1</span>)] +  [ct.c_uint]*<span class="Number">2</span>
     lib.cFunc(toDblPtr(matrix), xSz, ySz)
     <span class="Statement">return</span> matrix
 </pre>
