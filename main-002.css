@@ -2,7 +2,7 @@ body {
     max-width: 700px;
     margin: auto;
     padding: 10px;
-    text-align: justify;
+
     font-size: 17px;
     line-height: 1.7;
     font-family: Droid Sans, sans-serif, Open Sans, Roboto, Lato;
@@ -11,6 +11,10 @@ body {
 
 h1 {
     text-align: center;
+}
+
+.menu {
+    padding: 10px;
 }
 
 pre {
@@ -25,6 +29,14 @@ pre {
     line-height: 1.2;
     font-family: monospace;
 }
+
+.inline {
+    background-color: #dddddd;
+    font-size: 14px;
+    line-height: 1.2;
+    font-family: monospace;
+}
+
 
 .String { color: #afaf5f; }
 .Number { color: #d7875f; }

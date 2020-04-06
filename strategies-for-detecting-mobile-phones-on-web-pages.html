@@ -1,0 +1,71 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="stylesheet" type="text/css" href="main-002.css" />
+<title>Strategies for Detecting Mobile Phones on web pages</title>
+
+</head>
+<body>
+
+<p>
+<h3>Strategies for Detecting Mobile Phones on web pages</h3>
+<i>date: November 15, 2019</i>
+</p>
+<p>
+There is a fair amount on the web about detecting mobile devices on web sites. Doing so is very useful as modern web sites need to be accessable on oversized LED monitors, small mobile phones, and intermediate sized devices such as tablets.
+</p>
+<p>
+Most discussion on this topic focuses on user agent strings. This will detect Android and iOS operating systems and works relatively well. However, Android and iOS are also used on tablets, other good operating systems for smaller devices do exist, and future IoT devices could potentially need to render web pages.
+</p>
+<p>
+Aside from this, there are many ways to detect whether or not someone is using a mobile device. Currently, many browsers support the JavaScript method <span class="inline">Navigator.vibrate()</span>. Since tablets don't vibrate, this <i>would</i> be a very good way to detect mobile phones. However, current versions of Chrome and Firefox browsers tell me that my laptop is able to vibrate (which is cant').
+</p>
+<p>
+<b>Hardware</b><br>
+The below hardware gives a strong indication of whether or not a device is a regular computer. It can be detected fairly reliably, although not until an event is fired.
+<ul>
+    <li> mouse
+    <li> keyboard
+    <li> touch screen
+</ul>
+</p>
+<p>
+<b>Mobile and Tablet-Only Hardware</b><br>
+The below hardware is all but unique to mobile phones. Currently, however, detecting it is probably not a reliable means of device identification.
+<ul>
+    <li> vibrator
+    <li> device orientation
+    <li> accelerometer
+    <li> magnetometer
+    <li> gyroscope
+</ul>
+</p>
+
+<p>
+<b>Pixel Device Ratio</b><br>
+This is a property accesable in JavaScript as <span class="inline">window.devicePixelRatio</span>. On cell phones, it generally has a value of <span class="inline">2</span> or greater, while on PCs it has a value of <span class="inline">1</span>.
+</p>
+
+<p>
+<b>Screen to Inner Dimension Ratio</b><br>
+In the absence of a <span class="inline">viewport</span> meta tag, the inner dimension is substantially larger than the screen dimension. In JavaScript, the ratio is given as one of the following:
+<ul>
+<li><span class="inline">window.innerHeight / window.screen.height</span>
+<li><span class="inline">window.innerWidth / window.screen.width</span>
+</ul>
+
+
+</p>
+
+<nav class="menu">
+    <a href="index.html">blog index</a>
+</nav>
+
+</body>
+</html>
+
+
+
+
