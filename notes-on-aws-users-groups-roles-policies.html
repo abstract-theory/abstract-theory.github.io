@@ -1,0 +1,123 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="stylesheet" type="text/css" href="main-002.css" />
+<title>Notes on AWS Users, Groups, Roles, and Policies</title>
+<style>
+    .ol {
+        font-family: monospace;
+        font-size: 13px;
+        line-height: 1.7;
+    }
+
+    .l1 {padding-left: 2em;}
+    .l2 {padding-left: 5em;}
+    .l3 {padding-left: 8em;}
+
+    .description {
+        margin: 0.5em 0em 1.0em 0em;
+    }
+
+    .outline {
+        background-color: #f5faff;
+        border: solid 1px #888888;
+        border-radius: 5px;
+        padding: 15px 30px 15px 30px;
+        margin: 10px 0px 10px 0px;
+        line-height: 1.5;
+        font-size: 14px;
+    }
+
+    .topic {
+        font-family: Arial;
+        font-size: 18px;
+        font-weight: bold;
+    }
+</style>
+</head>
+<body>
+
+<p>
+<h3>Notes on AWS Users, Groups, Roles, and Policies</h3>
+<i>updated: December 29, 2020</i>
+</p>
+<p>
+AWS Identity and Access Management (IAM) is probably the most important service AWS offers. It's necessary security, user management, and to connect any other AWS service with another one. Permissions are managed through a complex system involving users, groups, roles, and policies.
+</p>
+<p>
+The functionality of users, groups, roles, and policies overlap considerably. Policies can be either placed inline or managed externally. Also, users, groups, and roles can be connected to one another. To illustrate various relationships, users, groups, roles, policies, and permission boundaries, have all been described and outlined below. The outlines summarize the features available through the AWS Management Console.
+</p>
+
+<div class="outline">
+<div class="topic">Users</div>
+<div class="description">An entity capable of connecting to and interacting with AWS.</div>
+<div class="ol l1">Outline Of Features:</div>
+<div class="ol l2">Inline Policy</div>
+<div class="ol l2">Attaches To:</div>
+<div class="ol l3">Policies</div>
+<div class="ol l3">Permissions Boundary</div>
+<div class="ol l3">Groups</div>
+<div class="ol l2">Security Credentials</div>
+<div class="ol l2">Access Advisor</div>
+<div class="ol l2">Tags</div>
+</div>
+
+<div class="outline">
+<div class="topic">Roles</div>
+<div class="description">A set of permissions that are restricted by a trust policy. The trust policy restricts which entities are able to assume the role. Roles are typically assumed by an AWS service, however, they can also be assumed by a user, group, or an AWS account.</div>
+<div class="ol l1">Outline Of Features:</div>
+<div class="ol l2">Inline Policy</div>
+<div class="ol l2">Trust Policy</div>
+<div class="ol l2">Attaches To:</div>
+<div class="ol l3">Policies</div>
+<div class="ol l3">Permissions Boundary</div>
+<div class="ol l2">Access Advisor</div>
+<div class="ol l2">Revoke Session</div>
+<div class="ol l2">Tags</div>
+</div>
+
+<div class="outline">
+<div class="topic">Groups</div>
+<div class="description">A set of permissions that are given only to users.</div>
+<div class="ol l1">Outline Of Features:</div>
+<div class="ol l2">Inline Policy</div>
+<div class="ol l2">Attaches To:</div>
+<div class="ol l3">Policies</div>
+<div class="ol l3">Users</div>
+<div class="ol l2">Access Advisor</div>
+</div>
+
+<div class="outline">
+<div class="topic">Policies</div>
+<div class="description">The primary mechanism for storing and organizing policies.</div>
+<div class="ol l1">Outline Of Features:</div>
+<div class="ol l2">Inline Policy</div>
+<div class="ol l2">Attaches To:</div>
+<div class="ol l3">Users</div>
+<div class="ol l3">Roles</div>
+<div class="ol l3">Groups</div>
+<div class="ol l2">Versioning</div>
+<div class="ol l2">Access Advisor</div>
+</div>
+
+<div class="outline">
+<div class="topic">Permissions Boundary</div>
+<div class="description">A type of policy. It limits what permissions an entity can attain.</div>
+<div class="ol l1">Outline Of Features:</div>
+<div class="ol l2">Attaches To:</div>
+<div class="ol l3">Users</div>
+<div class="ol l3">Roles</div>
+</div>
+
+<nav class="menu">
+    <a href="index.html">blog index</a>
+</nav>
+
+</body>
+</html>
+
+
+
+
