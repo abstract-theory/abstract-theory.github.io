@@ -1,3 +1,1 @@
----
-permalink: /index.html
----
+https://abstract-theory.github.io/
