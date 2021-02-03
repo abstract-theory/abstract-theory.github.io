@@ -1,0 +1,77 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="stylesheet" type="text/css" href="main-002.css" />
+<style>
+    code {background-color: #eeeeee;}
+</style>
+<title>Plain Auth with smtplib imaplib and Python</title>
+</head>
+<body>
+
+<p>
+<h3>Plain Auth with smtplib imaplib and Python</h3>
+<i>February 3, 2021</i>
+</p>
+
+<p>
+The <code>authenticate</code> and <code>auth</code> function definitions in <code>imaplib.IMAP4_SSL</code> and <code>smtplib.SMTP_SSL</code> are given as
+</p>
+
+<pre id='vimCodeElement'>
+<span class="Statement">def</span> <span class="pythonFunction">IMAP4</span>.authenticate(mechanism, authobject)
+</pre>
+
+<pre id='vimCodeElement'>
+<span class="Statement">def</span> <span class="pythonFunction">SMTP</span>.auth(mechanism, authobject, *, initial_response_ok=<span class="Function">True</span>)
+</pre>
+
+<p>
+However, there seems to be no guidance for implementing <code>authobject</code> for the login type <code>"PLAIN"</code>. After a fair amount of reading and guesswork, I've come up with the following implementations for <code>authobject</code>:
+</p>
+
+<pre id='vimCodeElement'>
+imap_auth = <span class="Statement">lambda</span> ch: f<span class="String">&quot;</span><span class="Special">\0</span><span class="String">{user}</span><span class="Special">\0</span><span class="String">{password}</span><span class="String">&quot;</span>.encode()
+</pre>
+
+<pre id='vimCodeElement'>
+smtp_auth = <span class="Statement">lambda</span>: f<span class="String">&quot;</span><span class="Special">\0</span><span class="String">{user}</span><span class="Special">\0</span><span class="String">{password}</span><span class="String">&quot;</span>
+</pre>
+
+
+<p>
+Two usage examples are shown below.
+</p>
+
+<pre id='vimCodeElement'>
+<span class="Include">import</span> imaplib
+
+imaplib.Debug = <span class="Number">4</span>
+imap_auth = <span class="Statement">lambda</span> ch: f<span class="String">&quot;</span><span class="Special">\0</span><span class="String">{user}</span><span class="Special">\0</span><span class="String">{password}</span><span class="String">&quot;</span>.encode()
+<span class="Statement">with</span> imaplib.IMAP4_SSL(host, port=<span class="Number">993</span>) <span class="Statement">as</span> cnx:
+    cnx.authenticate(<span class="String">&quot;</span><span class="String">PLAIN</span><span class="String">&quot;</span>, imap_auth)
+    typ, data = cnx.list()
+</pre>
+
+<pre id='vimCodeElement'>
+<span class="Include">import</span> smtplib
+
+smtp_auth = <span class="Statement">lambda</span>: f<span class="String">&quot;</span><span class="Special">\0</span><span class="String">{user}</span><span class="Special">\0</span><span class="String">{password}</span><span class="String">&quot;</span>
+<span class="Statement">with</span> smtplib.SMTP_SSL(host, port=<span class="Number">465</span>) <span class="Statement">as</span> cnx:
+    cnx.set_debuglevel(<span class="Number">1</span>)
+    cnx.auth(<span class="String">&quot;</span><span class="String">PLAIN</span><span class="String">&quot;</span>, smtp_auth)
+    cnx.sendmail(f<span class="String">&quot;</span><span class="String">{user}@localhost</span><span class="String">&quot;</span>, f<span class="String">&quot;</span><span class="String">{user}@localhost</span><span class="String">&quot;</span>, <span class="String">&quot;</span><span class="String">Hello World!</span><span class="String">&quot;</span>)
+</pre>
+
+<nav class="menu">
+    <a href="index.html">blog index</a>
+</nav>
+
+</body>
+</html>
+
+
+
+
